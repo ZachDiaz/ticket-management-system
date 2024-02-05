@@ -1,0 +1,27 @@
+### Create a Ticket
+POST http://localhost:3000/tickets
+Content-Type: application/json
+
+{
+  "content": "Ticket 3"
+}
+
+### Get all Tickets
+GET http://localhost:3000/tickets
+
+### Get a specific Ticket
+GET http://localhost:3000/tickets/1
+
+### Update a Ticket
+PATCH http://localhost:3000/tickets/1/update
+Content-Type: application/json
+
+{
+  "content": "Updated Ticket 1"
+}
+
+### Approve a Ticket
+PATCH http://localhost:3000/tickets/2/approve
+
+### Reject a Ticket
+PATCH http://localhost:3000/tickets/3/reject
