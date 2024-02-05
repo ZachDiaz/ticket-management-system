@@ -1,5 +1,6 @@
 import { Controller, Post, Patch, Get, Body, Param } from '@nestjs/common';
 import { TicketService } from './ticket.service';
+import { TicketValidationPipe } from './ticket-validation.pipe';
 
 @Controller('tickets')
 export class TicketController {
@@ -18,7 +19,7 @@ export class TicketController {
   }
 
   @Post()
-  createTicket(@Body() ticket: any) {
+  createTicket(@Body(new TicketValidationPipe()) ticket: any) {
     const result = this.ticketService.createTicket(ticket);
     return { message: result };
   }
@@ -36,7 +37,7 @@ export class TicketController {
   }
 
   @Patch(':id/update')
-  updateTicket(@Param('id') id: string, @Body() ticket: any) {
+  updateTicket(@Param('id') id: string, @Body(new TicketValidationPipe()) ticket: any) {
     const result = this.ticketService.updateTicket(id, ticket);
     return { message: result };
   }
