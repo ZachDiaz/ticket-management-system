@@ -1,11 +1,13 @@
-import { Controller, Post, Patch, Get, Body, Param } from '@nestjs/common';
+import { Controller, Post, Patch, Get, Body, Param, UseGuards } from '@nestjs/common';
 import { TicketService } from './ticket.service';
+import { AuthGuard } from '@nestjs/passport';
 import { TicketValidationPipe } from './ticket-validation.pipe';
 
 @Controller('tickets')
+@UseGuards(AuthGuard('local'))
 export class TicketController {
   constructor(private readonly ticketService: TicketService) {}
-
+  
   @Get()
   getAllTickets() {
     const tickets = this.ticketService.getAllTickets();
