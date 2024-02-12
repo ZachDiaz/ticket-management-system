@@ -80,6 +80,19 @@ describe('TicketService', () => {
       expect(updatedTicket.content).toEqual(updatedTicketContent);
     });
   
+    it('should have an updated_at attribute', () => {
+      service.createTicket({ content: 'Ticket Test' });
+      const tickets = service.getAllTickets();
+      const createdTicketId = tickets[tickets.length - 1].id;
+      const updatedTicketContent = 'Updated Ticket Test';
+      const updateMessage = service.updateTicket(createdTicketId, { content: updatedTicketContent });
+      const updatedTicket = service.getTicketById(createdTicketId);
+  
+      expect(updateMessage).toContain('updated');
+      expect(updatedTicket.updated_at).toBeDefined();
+      expect(typeof updatedTicket.updated_at).toBe('string');
+    });
+
     it('should return an error message for non-existent tickets', () => {
       const updateMessage = service.updateTicket('not-a-real-ticket', { content: 'Updated Ticket Test' });
   
