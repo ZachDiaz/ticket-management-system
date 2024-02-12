@@ -1,10 +1,7 @@
 import { Controller, Post, Patch, Get, Body, Param, UseGuards } from '@nestjs/common';
 import { TicketService } from './ticket.service';
-import { AuthGuard } from '@nestjs/passport';
-import { TicketValidationPipe } from './ticket-validation.pipe';
 
 @Controller('tickets')
-@UseGuards(AuthGuard('local'))
 export class TicketController {
   constructor(private readonly ticketService: TicketService) {}
   
@@ -21,7 +18,7 @@ export class TicketController {
   }
 
   @Post()
-  createTicket(@Body(new TicketValidationPipe()) ticket: any) {
+  createTicket(@Body() ticket: any) {
     const result = this.ticketService.createTicket(ticket);
     return { message: result };
   }
@@ -39,7 +36,7 @@ export class TicketController {
   }
 
   @Patch(':id/update')
-  updateTicket(@Param('id') id: string, @Body(new TicketValidationPipe()) ticket: any) {
+  updateTicket(@Param('id') id: string, @Body() ticket: any) {
     const result = this.ticketService.updateTicket(id, ticket);
     return { message: result };
   }

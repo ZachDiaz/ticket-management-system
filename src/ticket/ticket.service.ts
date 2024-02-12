@@ -44,12 +44,8 @@ export class TicketService {
 
   updateTicket(id: string, ticket: any): string {
     const ticketIndex = this.findIndexById(id);
-  
+
     if (ticketIndex !== -1) {
-      if (ticket.content === this.tickets[ticketIndex].content) {
-        return `Ticket ${id} cannot be updated with the same content`;
-      }
-  
       ticket.updated_at = `${year}-${month}-${day}`;
       this.tickets[ticketIndex] = { ...this.tickets[ticketIndex], ...ticket };
       return `Ticket ${id} updated`;
@@ -57,7 +53,6 @@ export class TicketService {
       return `Sorry, Ticket ${id} not found`;
     }
   }
-  
 
   getAllTickets(): any[] {
     return this.tickets;
