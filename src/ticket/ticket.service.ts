@@ -9,12 +9,20 @@ const day = String(now.getDate()).padStart(2, '0');
 export class TicketService {
   private tickets: any[] = [];
   private ticketIdCounter: number = 1;
-  createTicket(ticket: any): string {
 
+  createTicket(ticket: any): string {
     ticket.id = this.ticketIdCounter++;
     ticket.status = 'Pending';
     ticket.created_at = `${year}-${month}-${day}`;
-    this.tickets.push(ticket);
+
+    const TicketStructure = {
+      id: ticket.id,
+      content: ticket.content,
+      status: ticket.status,
+      created_at: ticket.created_at,
+  };
+
+    this.tickets.push(TicketStructure);
     return 'Ticket created';
   }
 

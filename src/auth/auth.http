@@ -1,8 +1,0 @@
-### User Login
-POST http://localhost:3000/auth/login
-Content-Type: application/json
-
-{
-  "username": "user1",
-  "password": "password1"
-}
